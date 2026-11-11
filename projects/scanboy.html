@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScanBoy | Owen Hollingsworth</title>
+<link rel="canonical" href="https://owenhollingsworth.com/projects/scanboy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Owen Hollingsworth">
+<meta property="og:title" content="ScanBoy | Owen Hollingsworth">
+<meta property="og:description" content="An RFID scanner dressed up as an original Game Boy. ScanBoy reads and writes both common card types, 13.56 MHz (MIFARE/NFC) and 125 kHz, from a single TAP spot on its back.">
+<meta property="og:url" content="https://owenhollingsworth.com/projects/scanboy.html">
+<meta property="og:image" content="https://owenhollingsworth.com/images/scanboy-01-hero.jpg">
+<meta property="og:image:alt" content="ScanBoy | Owen Hollingsworth">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="An RFID scanner dressed up as an original Game Boy. ScanBoy reads and writes both common card types, 13.56 MHz (MIFARE/NFC) and 125 kHz, from a single TAP spot on its back.">
+<link rel="preload" href="/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/barlow-condensed-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-head"><div class="wrap">
+<a class="site-name" href="/">Owen Hollingsworth</a>
+<nav class="site-nav" aria-label="Main"><a href="/#projects">Projects</a><a href="/#contact">Contact</a></nav>
+</div></header>
+<main>
+
+<div class="wrap">
+<p class="crumb"><a href="/#projects">All projects</a></p>
+<header class="project-head">
+<div><h1>ScanBoy</h1><p class="lede">An RFID scanner dressed up as an original Game Boy. ScanBoy reads and writes both common card types, 13.56 MHz (MIFARE/NFC) and 125 kHz, from a single TAP spot on its back.</p></div>
+<dl class="spec"><dt>Status</dt><dd>In development</dd><dt>Controller</dt><dd>ESP32</dd><dt>13.56 MHz</dt><dd>RC522 module (MIFARE/NFC)</dd><dt>125 kHz</dt><dd>EM4095 module</dd><dt>Display</dt><dd>16×2 blue-backlit LCD</dd><dt>Controls</dt><dd>Rotary encoder in the D-pad spot, A and B buttons</dd><dt>Storage</dt><dd>Full-size SD card</dd><dt>Power</dt><dd>18650 cell with USB-C charging</dd><dt>Size</dt><dd>90 × 152 × 32 mm, the same width as an original Game Boy</dd><dt>Enclosure</dt><dd>3D-printed in six colors, my own design</dd><dt>Firmware</dt><dd>C++ on the Arduino framework (just started)</dd><dt>Skills</dt><dd>RFID (13.56 MHz and 125 kHz), ESP32, SPI and I2C, soldering, battery power and charging, parametric CAD (build123d), 3D printing, AI-assisted development</dd></dl>
+</header>
+<div class="gallery"><figure><a href="/images/scanboy-01-hero.jpg"><img src="/images/scanboy-01-hero.jpg" alt="Render of a silver handheld shaped like an original Game Boy, with a blue LCD reading SCAN BOY v1.0 and TAP A CARD, a black knob where the D-pad would be, and pink A and B buttons." loading="lazy"></a><figcaption>Render of the v2 enclosure, with the LCD showing its ready screen.</figcaption></figure><figure><a href="/images/scanboy-02-back.jpg"><img src="/images/scanboy-02-back.jpg" alt="Render of the back of the handheld: a plain silver shell with six screw holes and a contactless icon labeled TAP." loading="lazy"></a><figcaption>The back, with the TAP spot where both antennas sit.</figcaption></figure></div>
+<section class="body"><h2>The goal</h2><div class="prose"><p>I'd researched RFID access control systems for work, but my boss decided to go a different direction. I still wanted to learn how RFID works, so I ordered some cheap reader modules and taught myself on my own time.</p><p>Design matters to me, and I didn't want those boards sitting on a breadboard on my desk while I learned. I wanted them in something that looked cool, in a nerdy way. While digging through a box of my classic video game consoles, I found my original Game Boy and knew that was the look.</p></div></section><section class="body"><h2>How it works</h2><div class="prose"><h3>Reading and writing</h3><p>Two reader modules cover both common kinds of access card: an RC522 for 13.56 MHz MIFARE and NFC cards, and an EM4095 for 125 kHz cards. Their antennas are stacked behind a single TAP spot on the back, so you never have to know which kind of card you're holding. An ESP32 runs both.</p><h3>Using it</h3><p>Results show up on a 16×2 blue-backlit LCD behind a Game Boy-style screen bezel. A rotary encoder sits where the D-pad would be, and the A and B buttons do what you'd expect. A full-size SD card slot on the right side stores your scans.</p><h3>Power and build</h3><p>An 18650 cell powers it, with USB-C charging on the bottom edge. The on/off slide switch is on the top edge, right where the original Game Boy's was. Inside, the electronics are wired together, but every board clips or press-fits into its own printed holder, so any of them lifts out of the case without desoldering. The two shells are held together by six screws in heat-set inserts.</p><div class="figs"><figure><a href="/images/scanboy-03-internals.jpg"><img src="/images/scanboy-03-internals.jpg" alt="Render of the two halves of the case opened side by side, with colored circuit boards held in printed clips and a green 18650 battery at the bottom of the right half." loading="lazy" class="whole"></a><figcaption>Render of the opened case: the RC522, EM4095 and SD module in the back shell (left), and the LCD, ESP32 perfboard and 18650 battery in the front shell (right).</figcaption></figure></div><div class="figs"><figure><a href="/images/scanboy-04-exploded.jpg"><img src="/images/scanboy-04-exploded.jpg" alt="Exploded render of the handheld: the front shell with knob and pink buttons, the circuit boards and the back shell pulled apart." loading="lazy" class="whole"></a><figcaption>Exploded render of the case and its parts.</figcaption></figure></div><p>I designed ScanBoy and wrote its code with Claude as a coding partner.</p></div></section><section class="body"><h2>Problems and fixes</h2><div class="prose"><ul><li><strong>The perfboard didn't fit.</strong> The first test print showed that a 70 × 30 mm board was too narrow for the ESP32's pin rows, which sit 25.4 mm apart, and a 50 × 70 mm board ran into the encoder. A 40 × 60 mm board fits, with room left for wiring.</li><li><strong>The SD module slid back.</strong> Pushing a card in shoved the whole module backward. A backstop wall behind it now takes the push.</li><li><strong>The encoder sat off-center.</strong> The knob's shaft isn't centered on its circuit board, so the board's clips and pads moved 1.8 mm to line the knob up with its hole.</li></ul><div class="figs"><figure><a href="/images/scanboy-05-test-print-vs-v2.jpg"><img src="/images/scanboy-05-test-print-vs-v2.jpg" alt="Side-by-side comparison: a printed silver prototype case on a cutting mat, and a render of the revised design with a blue LCD and pink buttons." loading="lazy" class="whole"></a><figcaption>Left: my first test print. Right: the v2 render, with a wider LCD window and Game Boy-style A and B buttons.</figcaption></figure></div></div></section><section class="body"><h2>Where it is now</h2><div class="prose"><p>The v2 enclosure is designed, with the fixes from the first test print and the 125 kHz reader added. I'm still refining the print so every component is held properly. The firmware is just getting started, in C++ on the Arduino framework, and hasn't been tested on the device yet.</p></div></section><section class="body"><h2>What's next</h2><div class="prose"><ul><li><strong>Finish the printed design</strong> so every component is held securely.</li><li><strong>Cut down the soldering</strong> so anyone else who wants to build one can.</li><li><strong>Assemble it and test the firmware</strong> on the real device.</li></ul></div></section>
+
+<nav class="next" aria-label="More projects"><a href="/projects/led-clock.html">Previous: LED clock</a><a href="/projects/thermolamp.html">Next: ThermoLamp</a></nav>
+</div>
+
+</main>
+<footer class="site-foot"><div class="wrap">
+<span>© 2026 Owen Hollingsworth</span>
+<span><a href="mailto:mail@owenhollingsworth.com">mail@owenhollingsworth.com</a> &nbsp; <a href="https://www.linkedin.com/in/owen-hollingsworth-677b1444a/">LinkedIn</a></span>
+</div></footer>
+</body>
+</html>
